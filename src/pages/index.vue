@@ -326,9 +326,6 @@ const getName = ()=>{
 const submit = async ()=>{
   let ball = 0;
   let countQuestion = 0;
-  for (const argumentsKey of Object.keys(form.value)) {
-    countQuestion++
-  }
 
   if (form.value.first === 'Бишкек'){
     ball++
