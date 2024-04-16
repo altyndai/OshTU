@@ -325,7 +325,6 @@ const getName = ()=>{
 }
 const submit = async ()=>{
   let ball = 0;
-  let countQuestion = 0;
 
   if (form.value.first === 'Бишкек'){
     ball++
