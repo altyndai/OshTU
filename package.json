@@ -21,6 +21,7 @@
     "whatsapp-web.js": "^1.16.4-alpha.0"
   },
   "devDependencies": {
+    "@babel/types": "^7.24.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
