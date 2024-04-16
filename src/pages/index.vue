@@ -257,7 +257,7 @@
 import {reactive, ref} from 'vue';
 import emailjs from 'emailjs-com';
 
-emailjs.init('VBfheZhp06HK3JnWR');
+emailjs.init('HUhbooeQGwnNi_5iK');
 
 const form = ref({
   name: '',
