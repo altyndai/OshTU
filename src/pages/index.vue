@@ -151,209 +151,219 @@
     </div>
   </Dialog>
 </template>
-<script lang="js">
-import { defineComponent, ref, reactive } from 'vue';
+<!--<script lang="js">-->
+<!--import { defineComponent, ref, reactive } from 'vue';-->
+<!--import emailjs from 'emailjs-com';-->
+
+<!--emailjs.init('VBfheZhp06HK3JnWR');-->
+
+<!--export default defineComponent({-->
+<!--  data() {-->
+<!--    return {-->
+<!--      form: {-->
+<!--        name: '',-->
+<!--        group: '',-->
+<!--        email: '',-->
+<!--        first: '',-->
+<!--        second: '',-->
+<!--        third: '',-->
+<!--        forth: '',-->
+<!--        fiveth: ''-->
+<!--      },-->
+<!--      visible: true,-->
+<!--      validations: {-->
+<!--        name: {-->
+<!--          message: 'ФИО может быть пустым',-->
+<!--          show: false,-->
+<!--          validate: ()=> {-->
+<!--            this.show = this.form.name === '';-->
+<!--            return !this.show;-->
+<!--          }-->
+<!--        },-->
+<!--        group: {-->
+<!--          message: 'Группа может быть пустым',-->
+<!--          show: false,-->
+<!--          validate: ()=> {-->
+<!--            this.show = this.form.group === '';-->
+<!--            return !this.show;-->
+<!--          }-->
+<!--        },-->
+<!--        email: {-->
+<!--          message: 'Email может быть пустым',-->
+<!--          show: false,-->
+<!--          validate: ()=> {-->
+<!--            this.show = this.form.email === '';-->
+<!--            return !this.show;-->
+<!--          }-->
+<!--        }-->
+<!--      }-->
+<!--    };-->
+<!--  },-->
+<!--  methods: {-->
+<!--    validate() {-->
+<!--      for (const validationItem of Object.values(this.validations)) {-->
+<!--        if (!validationItem.validate()) {-->
+<!--          return false;-->
+<!--        }-->
+<!--      }-->
+<!--      return true;-->
+<!--    },-->
+<!--    getName() {-->
+<!--      if (this.validate()) {-->
+<!--        console.log(this.form);-->
+<!--        this.visible = false;-->
+<!--      }-->
+<!--    },-->
+<!--    async submit() {-->
+<!--      let ball = 0;-->
+
+<!--      if (this.form.first === 'Бишкек') {-->
+<!--        ball++;-->
+<!--      }-->
+<!--      if (this.form.second === 'Нарын') {-->
+<!--        ball++;-->
+<!--      }-->
+<!--      if (this.form.third === 'Анхель') {-->
+<!--        ball++;-->
+<!--      }-->
+<!--      if (this.form.forth === 'Евразия') {-->
+<!--        ball++;-->
+<!--      }-->
+<!--      if (this.form.fiveth === 'Гренландия') {-->
+<!--        ball++;-->
+<!--      }-->
+<!--      emailjs.send("service_5pbd6ti","template_rhw9y49",{-->
+<!--        to_name: `Эжеке`,-->
+<!--        from_name: `${this.form.name}`,-->
+<!--        name: `${this.form.name}`,-->
+<!--        group: `${this.form.group}`,-->
+<!--        ball: `${ball}/5`,-->
+<!--        email: `${this.form.email}`-->
+<!--      });-->
+<!--      this.form = {-->
+<!--        name: '',-->
+<!--        group: '',-->
+<!--        first: '',-->
+<!--        second: '',-->
+<!--        third: '',-->
+<!--        forth: '',-->
+<!--        fiveth: ''-->
+<!--      };-->
+<!--    }-->
+<!--  }-->
+<!--});-->
+<!--</script>-->
+<script lang="ts" setup>
+import {reactive, ref} from 'vue';
 import emailjs from 'emailjs-com';
 
 emailjs.init('VBfheZhp06HK3JnWR');
 
-export default defineComponent({
-  data() {
-    return {
-      form: {
-        name: '',
-        group: '',
-        email: '',
-        first: '',
-        second: '',
-        third: '',
-        forth: '',
-        fiveth: ''
-      },
-      visible: true,
-      validations: {
-        name: {
-          message: 'ФИО может быть пустым',
-          show: false,
-          validate: ()=> {
-            this.show = this.form.name === '';
-            return !this.show;
-          }
-        },
-        group: {
-          message: 'Группа может быть пустым',
-          show: false,
-          validate: ()=> {
-            this.show = this.form.group === '';
-            return !this.show;
-          }
-        },
-        email: {
-          message: 'Email может быть пустым',
-          show: false,
-          validate: ()=> {
-            this.show = this.form.email === '';
-            return !this.show;
-          }
-        }
-      }
-    };
-  },
-  methods: {
-    validate() {
-      for (const validationItem of Object.values(this.validations)) {
-        if (!validationItem.validate()) {
-          return false;
-        }
-      }
-      return true;
-    },
-    getName() {
-      if (this.validate()) {
-        console.log(this.form);
-        this.visible = false;
-      }
-    },
-    async submit() {
-      let ball = 0;
+const form = ref({
+  name: '',
+  group: '',
+  email: '',
+  first: '',
+  second: '',
+  third: '',
+  forth: '',
+  fiveth: ''
+})
+const visible = ref(true)
 
-      if (this.form.first === 'Бишкек') {
-        ball++;
+const validations = reactive({
+  name: {
+    message: 'ФИО может быть пустым',
+    show: false,
+    validate: ()=>{
+      form.value.name
+      if (form.value.name == ''){
+        validations.name.show = true;
+      }else {
+        validations.name.show = false
       }
-      if (this.form.second === 'Нарын') {
-        ball++;
+      return !validations.name.show
+    }
+
+  },
+  group: {
+    message: 'Группа может быть пустым',
+    show: false,
+    validate: ()=>{
+      if (form.value.group == ''){
+        validations.group.show = true;
+      }else {
+        validations.group.show = false
       }
-      if (this.form.third === 'Анхель') {
-        ball++;
+      return  !validations.group.show
+    }
+  },
+  email: {
+    message: 'email может быть пустым',
+    show: false,
+    validate: ()=>{
+      if (form.value.email == ''){
+        validations.email.show = true;
+      }else {
+        validations.email.show = false
       }
-      if (this.form.forth === 'Евразия') {
-        ball++;
-      }
-      if (this.form.fiveth === 'Гренландия') {
-        ball++;
-      }
-      emailjs.send("service_5pbd6ti","template_rhw9y49",{
-        to_name: `Эжеке`,
-        from_name: `${this.form.name}`,
-        name: `${this.form.name}`,
-        group: `${this.form.group}`,
-        ball: `${ball}/5`,
-        email: `${this.form.email}`
-      });
-      this.form = {
-        name: '',
-        group: '',
-        first: '',
-        second: '',
-        third: '',
-        forth: '',
-        fiveth: ''
-      };
+      return  !validations.email.show
     }
   }
-});
+})
+const validate = () => {
+  for (const validationItem of Object.values(validations)) {
+    const valid = validationItem.validate()
+    if (!valid) { return false }
+  }
+  return true
+}
+const getName = ()=>{
+  validate()
+  console.log(form.value)
+  visible.value = false
+}
+const submit = async ()=>{
+  let ball = 0;
+  let countQuestion = 0;
+  for (const argumentsKey in form.value) {
+    countQuestion++
+  }
+
+  if (form.value.first === 'Бишкек'){
+    ball++
+  }
+  if (form.value.second === 'Нарын'){
+    ball++
+  }
+  if (form.value.third === 'Анхель'){
+    ball++
+  }
+  if (form.value.forth === 'Евразия'){
+    ball++
+  }
+  if (form.value.fiveth === 'Гренландия'){
+    ball++
+  }
+  emailjs.send("service_5pbd6ti","template_rhw9y49",{
+    to_name: `Эжеке`,
+    from_name: `${form.value.name}`,
+    name: `${form.value.name}`,
+    group: `${form.value.group}`,
+    ball: `${ball}/5`,
+    email: `${form.value.email}`
+  });
+  Object.assign(form.value, {
+    name: '',
+    group: '',
+    first: '',
+    second: '',
+    third: '',
+    forth: '',
+    fiveth: ''
+  })
+}
 </script>
-<!--<script lang="ts" setup>-->
-<!--import {reactive, ref} from 'vue';-->
-
-<!--const form = ref({-->
-<!--  name: '',-->
-<!--  group: '',-->
-<!--  email: '',-->
-<!--  first: '',-->
-<!--  second: '',-->
-<!--  third: '',-->
-<!--  forth: '',-->
-<!--  fiveth: ''-->
-<!--})-->
-<!--const visible = ref(true)-->
-
-<!--const validations = reactive({-->
-<!--  name: {-->
-<!--    message: 'ФИО может быть пустым',-->
-<!--    show: false,-->
-<!--    validate: ()=>{-->
-<!--      form.value.name-->
-<!--      if (form.value.name == ''){-->
-<!--        validations.name.show = true;-->
-<!--      }else {-->
-<!--        validations.name.show = false-->
-<!--      }-->
-<!--      return !validations.name.show-->
-<!--    }-->
-
-<!--  },-->
-<!--  group: {-->
-<!--    message: 'Группа может быть пустым',-->
-<!--    show: false,-->
-<!--    validate: ()=>{-->
-<!--      if (form.value.group == ''){-->
-<!--        validations.group.show = true;-->
-<!--      }else {-->
-<!--        validations.group.show = false-->
-<!--      }-->
-<!--      return  !validations.group.show-->
-<!--    }-->
-<!--  },-->
-<!--  email: {-->
-<!--    message: 'email может быть пустым',-->
-<!--    show: false,-->
-<!--    validate: ()=>{-->
-<!--      if (form.value.email == ''){-->
-<!--        validations.email.show = true;-->
-<!--      }else {-->
-<!--        validations.email.show = false-->
-<!--      }-->
-<!--      return  !validations.email.show-->
-<!--    }-->
-<!--  }-->
-<!--})-->
-<!--const validate = () => {-->
-<!--  for (const validationItem of Object.values(validations)) {-->
-<!--    const valid = validationItem.validate()-->
-<!--    if (!valid) { return false }-->
-<!--  }-->
-<!--  return true-->
-<!--}-->
-<!--const getName = ()=>{-->
-<!--  validate()-->
-<!--  console.log(form.value)-->
-<!--  visible.value = false-->
-<!--}-->
-<!--const submit = async ()=>{-->
-<!--  let ball = 0;-->
-<!--  let countQuestion = 0;-->
-<!--  for (const argumentsKey in form.value) {-->
-<!--    countQuestion++-->
-<!--  }-->
-
-<!--  if (form.value.first === 'Бишкек'){-->
-<!--    ball++-->
-<!--  }-->
-<!--  if (form.value.second === 'Нарын'){-->
-<!--    ball++-->
-<!--  }-->
-<!--  if (form.value.third === 'Анхель'){-->
-<!--    ball++-->
-<!--  }-->
-<!--  if (form.value.forth === 'Евразия'){-->
-<!--    ball++-->
-<!--  }-->
-<!--  if (form.value.fiveth === 'Гренландия'){-->
-<!--    ball++-->
-<!--  }-->
-
-<!--  Object.assign(form.value, {-->
-<!--    name: '',-->
-<!--    group: '',-->
-<!--    first: '',-->
-<!--    second: '',-->
-<!--    third: '',-->
-<!--    forth: '',-->
-<!--    fiveth: ''-->
-<!--  })-->
-<!--}-->
-<!--</script>-->
 <style>
 .p-dialog-header-icons{
   display: none !important;

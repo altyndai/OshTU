@@ -3,7 +3,7 @@ const routes: RouteRecordRaw[] = [
   {
     name: "home",
     path: "/",
-    component: () => import('../pages/index.vue'),
+    component: () => import("../pages/index.vue"),
   },
 ];
 const router = createRouter({
