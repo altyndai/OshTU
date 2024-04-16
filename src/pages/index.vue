@@ -341,7 +341,7 @@ const submit = async ()=>{
   if (form.value.fiveth === 'Гренландия'){
     ball++
   }
-  emailjs.send("service_5pbd6ti","template_rhw9y49",{
+  emailjs.send("service_xmurnlk","template_uak6noc",{
     to_name: `Эжеке`,
     from_name: `${form.value.name}`,
     name: `${form.value.name}`,
