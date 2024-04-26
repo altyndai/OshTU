@@ -55,7 +55,6 @@
             </div>
         </div>
        </div>
-
        <div class="flex flex-column mb-4">
         <div class="flex align-items-start mb-3">
             <p class="m-0"><span>3.</span>Эн чон шаркыратма?</p>
@@ -79,7 +78,6 @@
             </div>
         </div>
        </div>
-
        <div class="flex flex-column mb-4">
         <div class="flex align-items-start mb-3">
             <p class="m-0"><span>4.</span>Эн чон материк?</p>
@@ -126,9 +124,6 @@
             </div>
         </div>
        </div>
-
-
-
         <div class="flex justify-content-end">
             <Button label="Отправить" @click="submit"/>
         </div>
@@ -321,7 +316,9 @@ const validate = () => {
 const getName = ()=>{
   validate()
   console.log(form.value)
-  visible.value = false
+  if(form.value.name !== '' && form.value.group !== '' && form.value.email !== ''){
+    visible.value = false
+  }
 }
 const submit = async ()=>{
   let ball = 0;
